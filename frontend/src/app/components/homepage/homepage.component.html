@@ -1,0 +1,70 @@
+<body class="screen">
+    <form class="container">
+        <mat-card>
+            <mat-card-title>Registar</mat-card-title>
+            <mat-form-field class="full-width">
+                <mat-label>first_name</mat-label>
+                <input matInput placeholder="Introduza o seu primeiro nome" name="first_name" [(ngModel)]="first_name" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>last_name</mat-label>
+                <input matInput placeholder="Introduza o seu ultimo nome" name="last_name" [(ngModel)]="last_name" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>phone_number</mat-label>
+                <input matInput placeholder="Introduza o seu nº de telemovel" name="phone_number" [(ngModel)]="phone_number" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>email</mat-label>
+                <input matInput placeholder="Introduza o seu primeiro nome" name="email" [(ngModel)]="email" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>password</mat-label>
+                <input matInput placeholder="Introduza o seu primeiro nome" name="password" type="password" [(ngModel)]="password" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="registerUser()">Registar</button>
+            <mat-error *ngIf="error">{{error}}</mat-error>
+        </mat-card>
+    </form>
+    <div class="hero-text">
+        <h1>Deseja fazer um scan a sua maquina?</h1>
+        <p>Registe-se e comece já!</p>
+       
+      </div>
+</body>
+
+
+
+<!-- <div class="bg-img">
+    <form action="/users" method="post" class="container" >
+       
+        <h2>Registar</h2>
+
+        <label for="first_name"><b>Primeiro Nome</b></label>
+        <input type="text" placeholder="Primeiro Nome" name="first_name" required>
+
+        <label for="last_name"><b>Ultimo Nome</b></label>
+        <input type="text" placeholder="Ultimo Nome" name="last_name" required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="phone_number"><b>Telemovel</b></label>
+        <input type="tel" placeholder="Telemovel" name="phone_number" required>
+
+        <button mat-raised-button color="primary" (click)="registerUser()">registar</button>
+
+        <p>Already have an account? <a href="login">Sign in</a>.</p>
+
+    </form>
+
+    <div class="hero-text">
+        <h1>Deseja fazer um scan a sua maquina?</h1>
+        <p>Registe-se e comece já!</p>
+       
+      </div>
+   
+</div> -->

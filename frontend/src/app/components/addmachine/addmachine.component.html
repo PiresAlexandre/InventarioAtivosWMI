@@ -1,0 +1,21 @@
+
+<body class="screen">
+    <form class="container">
+        <mat-card>
+            <mat-card-title>Registe as maquinas a fazer scan</mat-card-title>
+            <mat-form-field class="full-width">
+                <mat-label>Ip Maquina</mat-label>
+                <input matInput placeholder="Introduza o IP da maquina" name="ip" [(ngModel)]="ip" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Introduza o Username" name="username" [(ngModel)]="username" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Introduza a password" name="password" type="password" [(ngModel)]="password" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="machine()">Add</button>
+        </mat-card>
+    </form>
+</body>

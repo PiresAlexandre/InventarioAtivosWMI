@@ -1,0 +1,91 @@
+ .container {
+    position: absolute;
+    right: 320px;
+    margin: 130px;
+    max-width: 410px;
+    padding: 34px;
+    background-color: white;
+    border-radius: 10%;
+    background-color: aquamarine;
+  }
+
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .full-width {
+    margin-top: 4%;
+    width: 100%;
+  }
+
+  .screen{
+    background-color: rgb(30, 211, 151);
+    
+  }
+  
+
+/* Bordered form
+form {
+    border: 3px solid #f1f1f1;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+
+  .container {
+    position: absolute;
+    right: 320px;
+    margin: 130px;
+    max-width: 410px;
+    padding: 34px;
+    background-color: white;
+    border-radius: 10%;
+  }
+  
+
+  .bg-img {
+    
+    background-image: url("rede-computadores-artigo.jpg");
+  
+    height: 630px;
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    
+  } */
