@@ -1,5 +1,6 @@
 from .users import UsersApi, LoginApi, UserApi, UserProfileApi, UserPasswordApi
 from .machine import MachinesApi, MachineApi
+from .scan import ScanApi
 
 
 def initialize_routes(api):
@@ -10,3 +11,4 @@ def initialize_routes(api):
  api.add_resource(UserPasswordApi, '/api/auth/changepassword')
  api.add_resource(MachinesApi, '/api/machines')
  api.add_resource(MachineApi, '/api/machines/<id>')
+ api.add_resource(ScanApi, '/api/scan/<machine_id>')

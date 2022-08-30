@@ -22,8 +22,8 @@ export class AuthenticationService {
     return this.http.post<any>(this.endpoint + '/auth/login', { email, password });
   }
 
-  registerUser(first_name: string, last_name: string, phone_number: string, email: string, password: string): Observable<any> {
-    return this.http.post<any>(this.endpoint + '/users', { first_name, last_name, phone_number, email, password });
+  registerUser(user: any): Observable<any> {
+    return this.http.post<any>(this.endpoint + '/users', user);
   }
 
   logout() {

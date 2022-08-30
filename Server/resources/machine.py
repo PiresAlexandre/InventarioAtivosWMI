@@ -54,7 +54,7 @@ class MachinesApi(Resource):
             user.save()
             return make_response(
                 jsonify(
-                    {"message": "sucess"}
+                    machine
                 ),
                 200
             )

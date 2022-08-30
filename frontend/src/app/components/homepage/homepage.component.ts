@@ -16,17 +16,18 @@ export class HomepageComponent implements OnInit {
   email!: string
   password!: string
 
-  error!: string;
+  error: string | null = null;
 
   constructor(private auth: AuthenticationService, private router: Router) {
 
   }
 
   ngOnInit(): void {
+    
   }
 
   registerUser() {   
-    this.auth.registerUser(this.first_name, this.last_name, this.phone_number, this.email, this.password)
+    this.auth.registerUser(AuthenticationService)
       .subscribe(
         data => {
           localStorage.setItem('currentUser', JSON.stringify(data));

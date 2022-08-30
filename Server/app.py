@@ -5,15 +5,13 @@ from resources.routes import initialize_routes
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from os import environ
-from flask_cors import CORS
 
 
 app = Flask(__name__)
 
 app.config["MONGODB_SETTINGS"] = {
-    "host": 'mongodb+srv://{0}:{1}@clusterinventario.5ajzhc8.mongodb.net/{2}?retryWrites=true&w=majority'.
-    format(environ.get('MONGODB_USERNAME'), environ.get(
-        'MONGODB_PASSWORD'), environ.get('MONGODB_DATABASE_NAME'))
+    "host": 'mongodb://localhost/{0}'.
+    format(environ.get('MONGODB_DATABASE_NAME'))
 }
 
 app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
@@ -21,7 +19,6 @@ app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
 api = Api(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-cors = CORS(app)
 
 initialize_db(app)
 

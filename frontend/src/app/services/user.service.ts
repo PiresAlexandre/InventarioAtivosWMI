@@ -30,12 +30,4 @@ export class UserService {
     return this.http.get<any>(this.endpoint + '/auth/profile', this.httpOptions);
   }
 
-  editProfile(user: any): Observable<any> {
-    return this.http.put<any>(this.endpoint + '/auth/profile', user, this.httpOptions);
-  }
-
-  changePassword(email: string, code: string, newPassword: string): Observable<any> {
-    return this.http.post<any>(this.endpoint + '/changepassword', { email: email, code: code, newPassword: newPassword }, this.httpOptions);
-  }
-
 }
