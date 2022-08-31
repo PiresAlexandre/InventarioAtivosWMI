@@ -1,7 +1,8 @@
+from tkinter import UNITS
 from flask_restful import Resource
-from flask import Response, request, make_response, jsonify
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError, OperationError
+from flask import make_response, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from mongoengine.errors import  DoesNotExist
 from database.models import EventLog, Machine, User, Disk, Scan, Software
 import wmi
 import pythoncom
@@ -9,7 +10,7 @@ import pythoncom
 
 class ScanApi(Resource):
     @jwt_required()
-    def get(self, machine_id):
+    def post(self, machine_id):
 
         user_id = get_jwt_identity()
     
@@ -43,7 +44,9 @@ class ScanApi(Resource):
 
         pythoncom.CoInitialize ()
         try:
-            c = wmi.WMI(machine.ip, user=machine.username, password=machine.password)
+            
+            c = wmi.WMI()
+
             scan = Scan()
 
             scan.system_type = c.Win32_ComputerSystem()[0].SystemType
@@ -71,30 +74,44 @@ class ScanApi(Resource):
                     software = Software(name=name, version=version, publisher=publisher)
                     scan.softwares.append(software)
             
+            i = 0
             for e in c.Win32_NTLogEvent(EventType=2):
-                if e.SourceName and e.Message and e.EventType:
+                if e.SourceName and e.Message and e.EventType and i < 20:
                     name = e.SourceName
                     message = e.Message
                     event_type = e.EventType
                     type= e.Type
                     event = EventLog(name=name, message=message, event_type=event_type, type=type)
                     scan.eventlog.append(event)
+                    i = i + 1
             
+            j = 0
             for e in c.Win32_NTLogEvent(EventType=1):
-                if e.SourceName and e.Message and e.EventType:
+                if e.SourceName and e.Message and e.EventType and j < 20:
                     name = e.SourceName
                     message = e.Message
                     event_type = e.EventType
                     type= e.Type
                     event = EventLog(name=name, message=message, event_type=event_type, type=type)
                     scan.eventlog.append(event)
-                
+                    j = j + 1
+                    
+            scan.machine = machine
             scan.save()
             machine.update(push__scans=scan)
             machine.save()
-            
+
+        except (wmi.x_access_denied):
+            return make_response(
+            jsonify(
+                {"message": "Acesso negado"}
+            ),
+            200
+        )
+
         finally:
             pythoncom.CoUninitialize ()
+        
 
         return make_response(
             jsonify(
@@ -103,8 +120,59 @@ class ScanApi(Resource):
             200
         )
 
-  
 
+    @jwt_required()
+    def get(self, machine_id):
+
+        user_id = get_jwt_identity()
+    
+        try:            
+            user = User.objects.get(id=user_id)
+        except (DoesNotExist):
+            return make_response(
+                jsonify(
+                    {"message": "User don't exist"}
+                ),
+                400
+            )
+        
+        try:          
+            machine = Machine.objects.get(id=machine_id)
+        except (DoesNotExist):
+            return make_response(
+                jsonify(
+                    {"message": "Machine don't exist"}
+                ),
+                400
+            )
+        
+        if str(machine.added_by.id) != str(user_id):
+                return make_response(
+                    jsonify(
+                        {"message": "Token not autorize"}
+                    ),
+                    400
+                )
+        try:
+
+            scans = Scan.objects(machine=machine.id).order_by('-date')
+
+            return make_response(  
+                jsonify(
+                    scans[0]
+                )
+                ,
+                200
+            )
+
+        except Exception as e:
+            return make_response(
+                jsonify(
+                    {"message": "Internal error"}
+                ),
+                500
+            )
 
 def convert_bytes(bytes_number): 
     return round(bytes_number/ 1024**3)
+

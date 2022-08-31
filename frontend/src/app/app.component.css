@@ -67,3 +67,8 @@
   margin-left: 5px;
   color: white;
 }
+
+.mat-button{
+  box-sizing: border-box;
+  padding: 0px;
+}
