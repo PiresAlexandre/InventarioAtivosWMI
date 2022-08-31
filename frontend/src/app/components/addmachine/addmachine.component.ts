@@ -7,6 +7,8 @@ import { MachinesService } from 'src/app/services/machines.service';
   templateUrl: './addmachine.component.html',
   styleUrls: ['./addmachine.component.css']
 })
+
+
 export class AddmachineComponent implements OnInit {
   ip!: string;
   username!: string;
@@ -14,11 +16,14 @@ export class AddmachineComponent implements OnInit {
 
   error: string | null = null;;
 
+  
+
 
   constructor(private machines: MachinesService, private router: Router) { }
 
   ngOnInit(): void {
   }
+
 
   machine(){
 

@@ -1,4 +1,11 @@
-.container {
+.example-container {
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  border: 1px solid #555;
+}
+
+/* .container {
     position: absolute;
     right: 320px;
     margin: 130px;
@@ -27,4 +34,4 @@
   .screen{
     background-color: rgb(30, 211, 151);
     
-  }
+  } */

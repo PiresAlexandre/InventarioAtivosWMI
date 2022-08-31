@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +11,49 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('select') select!: MatSelect;
 
  email!: string;
  password!: string;
  error: string | null = null;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+  toggle: boolean;
+  activeLogin = 'nav-link active';
+  activeRegister = 'nav-link ';
+  hide = true;
 
-  constructor(private auth: AuthenticationService, private router: Router, public userService: UserService) {
- 
+  constructor(private auth: AuthenticationService, private router: Router, public userService: UserService, private fb: FormBuilder,) {
+    this.toggle = false;
+    
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+
+    this.registerForm = this.fb.group({
+      first_name: ['', Validators.required ],
+      last_name: ['', Validators.required ],
+      email: ['', Validators.required],
+      phoneNumber: ['',Validators.required],
+      password: ['',Validators.required],
+    
+    
+    });
+  }
+
+  toggleRegister() {
+    this.toggle = true;
+    this.activeLogin = 'nav-link ';
+    this.activeRegister = 'nav-link active';
+    this.loginForm.reset();
+  }
+
+  toggleLogin() {
+    this.toggle = false;
+    this.activeLogin = 'nav-link active';
+    this.activeRegister = 'nav-link ';
+    this.registerForm.reset();
   }
 
   ngOnInit(): void {
@@ -26,6 +64,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {       
          localStorage.setItem('currentUser', JSON.stringify(data));
+         this.auth.isUserLoggedIn.next(true)
          this.router.navigate(['profile'])
             
         },
@@ -42,8 +81,22 @@ export class LoginComponent implements OnInit {
          
         }
       )
+  }
 
-
-
+  register() {
+    
+  //   user.age = this.registerForm.value.typeAge;
+  //   user.readerType = this.registerForm.value.typeBooks;
+  //   this.authService.registerClient(user).subscribe(
+  //     (data) => {
+  //       if (data.success) {
+  //         this.errorRegister = undefined;
+  //         this.toggleLogin();
+  //       }
+  //     },
+  //     (error) => {
+  //       this.errorRegister = error.error;
+  //     }
+  //   );
   }
 }

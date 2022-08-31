@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container *ngIf="loggedIn" fullscreen [hasBackdrop]=true class='app-drawer-container' >
+
+  <mat-sidenav  #sidenav mode="over" position="start">
+   
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <mat-toolbar class="toolbar">
+      <div class="div1">
+        <div class="divButton" >
+          <button mat-button id="button" (click)="sidenav.toggle()"><mat-icon class="menuIcon">menu</mat-icon></button>
+        </div>       
+        <div class="profile"  [routerLink]="['/view-profile']">
+            <span class="userName">alex</span>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="application contentRouter">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<router-outlet *ngIf="!loggedIn"></router-outlet>

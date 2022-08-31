@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private endpoint = 'http://localhost:5000/api'
 
+  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   constructor(private http: HttpClient, private router: Router) {
-    
+    if (localStorage.getItem('currentUser') != null) {
+      this.isUserLoggedIn.next(true);
+    } else {
+      this.isUserLoggedIn.next(false);
+    }
   }
 
   ngOnInit() {
@@ -29,7 +35,7 @@ export class AuthenticationService {
   logout() {
     if (localStorage.getItem('currentUser') != null) {
       localStorage.removeItem('currentUser')
-      localStorage.removeItem('emailUser')
+      this.isUserLoggedIn.next(false);
     }
 
   }
