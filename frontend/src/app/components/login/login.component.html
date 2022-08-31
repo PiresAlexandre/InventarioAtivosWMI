@@ -32,6 +32,7 @@
                     </button>
 
                 </mat-form-field>
+                <mat-error *ngIf="error_login">{{error_login}}</mat-error>
 
                 <div mat-dialog-actions class="actionL">
                     <button id="button" mat-raised-button [disabled]="!loginForm.valid" color="primary"
@@ -65,47 +66,31 @@
 
                 <!-- PhoneNumber input -->
                 <mat-form-field class="full-width">
-                    <input matInput name="phoneNumber" type="text" maxlength="" class="input-field"
-                        formControlName="phoneNumber" placeholder="Introduza o seu Telemovel" required />
+                    <input matInput name="phone_number" type="text" maxlength="" class="input-field"
+                        formControlName="phone_number" placeholder="Introduza o seu Telemovel" required />
                     <mat-icon matSuffix>phone</mat-icon>
 
                 </mat-form-field>
 
                 <!-- Password input -->
                 <mat-form-field class="full-width">
-                    <input matInput name="password" [type]="hide ? 'password' : 'text'" class="input-field"
+                    <input matInput name="password" [type]="hide2 ? 'password' : 'text'" class="input-field"
                         formControlName="password" placeholder="Introduza a Palavra-passe" required />
-                    <button matSuffix mat-icon-button type="button">
-
-                    </button>
+                        <button type="button" matSuffix mat-icon-button>
+                            <mat-icon matTooltip="{{hide2 ? 'Mostrar Palavra-passe' : ' Não Mostrar Palavra-passe'}}"
+                                (click)="hide2 = !hide2">{{ hide2 ? "visibility_off" : "visibility" }}
+                            </mat-icon>
+                        </button>
 
                 </mat-form-field>
+                <mat-error *ngIf="error_register">{{error_register}}</mat-error>
 
                 <div mat-dialog-actions class="actionL">
                     <button id="button" mat-raised-button [disabled]="!registerForm.valid" color="primary"
-                        type="submit">Resgistar</button>
+                        type="submit">Registar</button>
                 </div>
             </form>
         </div>
     </div>
 </mat-card>
 
-
-<!-- <body class="screen">
-    <form class="container">
-        <mat-card>
-            <mat-card-title>Login</mat-card-title>
-            <mat-form-field class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="Introduza o seu email" name="email" [(ngModel)]="email" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="Introduza a sua Palavra-passe" type="password" name="password"
-                    [(ngModel)]="password" required>
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="login()">login</button>
-            <mat-error *ngIf="error">{{error}}</mat-error>
-        </mat-card>
-    </form>
-</body> -->

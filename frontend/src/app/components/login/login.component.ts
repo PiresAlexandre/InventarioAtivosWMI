@@ -13,32 +13,30 @@ import { MatSelect } from '@angular/material/select';
 export class LoginComponent implements OnInit {
   @ViewChild('select') select!: MatSelect;
 
- email!: string;
- password!: string;
- error: string | null = null;
+  error_login: string | null = null;
+  error_register: string | null = null;
   loginForm: FormGroup;
   registerForm: FormGroup;
   toggle: boolean;
   activeLogin = 'nav-link active';
   activeRegister = 'nav-link ';
   hide = true;
+  hide2 = true;
 
   constructor(private auth: AuthenticationService, private router: Router, public userService: UserService, private fb: FormBuilder,) {
     this.toggle = false;
-    
+
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
 
     this.registerForm = this.fb.group({
-      first_name: ['', Validators.required ],
-      last_name: ['', Validators.required ],
-      email: ['', Validators.required],
-      phoneNumber: ['',Validators.required],
-      password: ['',Validators.required],
-    
-    
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone_number: ['', [Validators.required]],
+      password: ['', [Validators.required]],  
     });
   }
 
@@ -60,43 +58,47 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.email, this.password)
+    this.auth.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
       .subscribe(
-        data => {       
-         localStorage.setItem('currentUser', JSON.stringify(data));
-         this.auth.isUserLoggedIn.next(true)
-         this.router.navigate(['profile'])
-            
+        data => {
+          this.error_login = null
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.auth.isUserLoggedIn.next(true)
+          this.router.navigate(['profile'])
+
         },
         error => {
-         console.log(error.error.message);
-         if(error.status == 401){
-          if(error.error.message === "Email don't exist"){
-            this.error = "Email não existe"
+          console.log(error.error.message);
+          if (error.status == 401) {
+            if (error.error.message === "Email don't exist") {
+              this.error_login = "Email não existe"
+            }
+            if (error.error.message === "Password Incorrect") {
+              this.error_login = "Palavra-passe incorreta"
+            }
           }
-          if(error.error.message === "Password Incorrect"){
-            this.error = "Palavra-passe incorreta"
-          }
-         }
-         
+
         }
       )
   }
 
   register() {
+    console.log(this.registerForm.value);
     
-  //   user.age = this.registerForm.value.typeAge;
-  //   user.readerType = this.registerForm.value.typeBooks;
-  //   this.authService.registerClient(user).subscribe(
-  //     (data) => {
-  //       if (data.success) {
-  //         this.errorRegister = undefined;
-  //         this.toggleLogin();
-  //       }
-  //     },
-  //     (error) => {
-  //       this.errorRegister = error.error;
-  //     }
-  //   );
+    this.auth.registerUser(this.registerForm.value)
+      .subscribe(
+        data => {
+       
+            this.error_register = null
+            this.toggleLogin();
+          
+        },
+        error => {
+          if (error.status == 400) {
+            this.error_register = error.error.message
+          }
+        }
+
+      );
   }
 }
