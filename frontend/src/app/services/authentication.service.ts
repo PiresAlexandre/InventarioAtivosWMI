@@ -32,6 +32,10 @@ export class AuthenticationService {
     return this.http.post<any>(this.endpoint + '/users', user);
   }
 
+  registerMachine(user: any): Observable<any> {
+    return this.http.post<any>(this.endpoint + '/machines', user);
+  }
+  
   logout() {
     if (localStorage.getItem('currentUser') != null) {
       localStorage.removeItem('currentUser')

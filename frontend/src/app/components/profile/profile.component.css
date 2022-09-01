@@ -1,0 +1,15 @@
+.consolelog{
+    display: flex;
+    top: 560px;
+    width: 1000px;
+    background-color: aqua;
+    
+}
+
+.software {
+    
+    background-color: pink;
+    max-width: 150px;
+    height: 500px;
+    left: 1400px;
+  }

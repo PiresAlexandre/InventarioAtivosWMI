@@ -1,0 +1,88 @@
+<div class="containers">
+    <div class="containers2">
+        <div class="containerinventario">
+            <table class="table">
+                <tr>
+                    <td>Tipo: {{scan.system_type}}</td>
+                    <td>Utilizador: {{scan.user}}</td>
+                </tr>
+                <tr>
+                    <td>Sistema Operativo: {{scan.operative_system}}</td>
+                    <td>Fabricante: {{scan.manufacturer}}</td>
+                </tr>
+                <tr>
+                    <td>Modelo: {{scan.model}}</td>
+                    <td>Memoria: {{scan.memory}}</td>
+                </tr>
+                <tr>
+                    <td>Processador: {{scan.processor}}</td>
+                    <td>MotherBoard: {{scan.motherboard}}</td>
+                </tr>
+                <tr>
+                    <td>Gráfica: {{scan.graphic}}</td>
+                    <td>Discos: 
+                  
+                   
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="containereventlog">
+            <div class="divEvents">
+                <div class="titleEventLog">
+                    <div class="fieldTitle">
+                        Events Log
+                    </div>
+                </div>
+                <mat-table #table [dataSource]="dataSourceEventslog">
+                        
+                    <ng-container matColumnDef="name">
+                      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+              
+                    <ng-container matColumnDef="message">
+                      <mat-header-cell *matHeaderCellDef> Messagem </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.message}} </mat-cell>
+                    </ng-container>
+                                  
+                    <ng-container matColumnDef="type">
+                      <mat-header-cell *matHeaderCellDef> Tipo de evento </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                    </ng-container>
+                
+                    <mat-header-row *matHeaderRowDef="displayedColumnsEventslog"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsEventslog;"></mat-row>
+                  </mat-table>
+            </div>
+        </div>
+    </div>
+    <div class="containersoftwares">
+        <div class="titleSoftware">
+            <div class="fieldTitle">
+                Softwares
+            </div>
+        </div>
+        <mat-table #table [dataSource]="dataSourceSoftwares" class="tableSoftware">
+                        
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="version">
+              <mat-header-cell *matHeaderCellDef> Versão </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.version}} </mat-cell>
+            </ng-container>
+                          
+            <ng-container matColumnDef="publisher">
+              <mat-header-cell *matHeaderCellDef> Fabricante </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.publisher}} </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumnsSoftwares"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnsSoftwares;"></mat-row>
+          </mat-table>
+    </div>
+</div>

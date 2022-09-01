@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MachinesService } from 'src/app/services/machines.service';
 
 @Component({
@@ -10,16 +13,22 @@ import { MachinesService } from 'src/app/services/machines.service';
 
 
 export class AddmachineComponent implements OnInit {
-  ip!: string;
-  username!: string;
-  password!: string;
+  @ViewChild('select') select!: MatSelect;
 
-  error: string | null = null;;
+  error: string | null = null;
+  registerForm: FormGroup;
+  fb: any;
+  hide = true;
 
-  
 
+  constructor(private auth: AuthenticationService, private router: Router) {
 
-  constructor(private machines: MachinesService, private router: Router) { }
+    this.registerForm = this.fb.group({
+      ip: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],  
+    });
+   }
 
   ngOnInit(): void {
   }
@@ -27,12 +36,10 @@ export class AddmachineComponent implements OnInit {
 
   machine(){
 
-     this.machines.machines(this.ip, this.username, this.password)
+     this.auth.registerMachine(this.registerForm.value)
        .subscribe(
          data => {       
-          localStorage.setItem('currentUser', JSON.stringify(data));
-          this.router.navigate(['profile'])
-            
+  
          },
         error => {
          console.log(error.error.message);

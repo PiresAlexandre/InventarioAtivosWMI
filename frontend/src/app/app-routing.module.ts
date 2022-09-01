@@ -4,13 +4,15 @@ import { AddmachineComponent } from './components/addmachine/addmachine.componen
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { InventarioComponent } from './inventario/inventario.component';
 
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
   { path: 'machines', component: AddmachineComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'inventario/:id', component: InventarioComponent}
 
 ];
 

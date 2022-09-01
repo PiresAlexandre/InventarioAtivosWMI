@@ -1,37 +1,41 @@
-.example-container {
+.div2 {
+  margin-top: 200px;
   width: 400px;
-  height: 200px;
-  margin: 10px;
-  border: 1px solid #555;
+  height: auto;
+  margin: auto;
 }
 
-/* .container {
-    position: absolute;
-    right: 320px;
-    margin: 130px;
-    max-width: 410px;
-    padding: 34px;
-    background-color: white;
-    border-radius: 10%;
-    background-color: rgb(30, 211, 151);
-  }
+.my-form {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+}
 
-  button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
+.full-width {
+  margin-top: 4%;
+  width: 100%;
+  max-width: 250px;
+}
 
-  .full-width {
-    margin-top: 4%;
-    width: 100%;
-  }
+#button {
+  width: 150px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+}
 
-  .screen{
-    background-color: rgb(30, 211, 151);
-    
-  } */
+.actionL {
+  justify-content: center;
+  margin: auto;
+  padding: 0px;
+}
+
+.mat-error {
+  text-align: center;
+}
+
+.mb-3{
+  width: 200px;
+  margin: auto;
+}
+

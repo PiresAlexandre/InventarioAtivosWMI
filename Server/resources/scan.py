@@ -45,7 +45,7 @@ class ScanApi(Resource):
         pythoncom.CoInitialize ()
         try:
             
-            c = wmi.WMI()
+            c = wmi.WMI(machine.ip, user=machine.username, password=machine.password)
 
             scan = Scan()
 
@@ -156,19 +156,30 @@ class ScanApi(Resource):
         try:
 
             scans = Scan.objects(machine=machine.id).order_by('-date')
+            print (len(scans))
 
-            return make_response(  
-                jsonify(
-                    scans[0]
+            if len(scans)>0:
+
+                return make_response(  
+                    jsonify(
+                        scans[0]
+                    )
+                    ,
+                    200
                 )
-                ,
-                200
-            )
+            else:
+                return make_response(  
+                    jsonify(
+                        {"message": "No scans for this machine"}
+                    )
+                    ,
+                    200
+                )
 
         except Exception as e:
             return make_response(
                 jsonify(
-                    {"message": "Internal error"}
+                    {"message": "Internal Error"}
                 ),
                 500
             )

@@ -1,24 +1,32 @@
+<mat-card>
+    <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+        <form method="POST" class="my-form" [formGroup]="registerForm" (submit)="machine()">
 
-  
+            <mat-form-field class="full-width">
+                <input matInput name="ip" type="text" class="input-field" formControlName="ip"
+                    placeholder="Introduza o ip da máquina" required />
 
-<!-- 
-<body class="screen">
-    <form class="container">
-        <mat-card>
-            <mat-card-title>Registe as maquinas a fazer scan</mat-card-title>
-            <mat-form-field class="full-width">
-                <mat-label>Ip Maquina</mat-label>
-                <input matInput placeholder="Introduza o IP da maquina" name="ip" [(ngModel)]="ip" required>
             </mat-form-field>
+
             <mat-form-field class="full-width">
-                <mat-label>Username</mat-label>
-                <input matInput placeholder="Introduza o Username" name="username" [(ngModel)]="username" required>
+                <input matInput name="username" type="text" class="input-field" formControlName="username"
+                    placeholder="Introduza o seu username" required />
+
             </mat-form-field>
+
+
             <mat-form-field class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="Introduza a password" name="password" type="password" [(ngModel)]="password" required>
+                <input matInput name="password" [type]="hide ? 'password' : 'text'" class="input-field"
+                    formControlName="password" placeholder="Introduza a Palavra-passe" required />
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="machine()">Add</button>
-        </mat-card>
-    </form>
-</body> -->
+
+
+            <div mat-dialog-actions class="actionL">
+                <button id="button" mat-raised-button [disabled]="!registerForm.valid" color="primary"
+                    type="submit">Registar</button>
+            </div>
+        </form>
+    </div>
+
+</mat-card>
+

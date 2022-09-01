@@ -16,11 +16,8 @@ export class MachinesService {
   ngOnInit() {
   }
 
-  
-
-  machines(ip: string, username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.endpoint + '/machines', { ip, username, password });
-
+  getLastScanMachine(id : string | null): Observable<any> {
+    return this.http.get<any>(this.endpoint + '/scan/' + id);
   }
 
 }
