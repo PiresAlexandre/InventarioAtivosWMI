@@ -19,7 +19,7 @@
 
 .toolbar {
   background-color: #365681;
-  padding: 8px;
+  padding: 2.5px;
   height: 45px;
   display: block;
   position: fixed;
@@ -31,7 +31,7 @@
 
 .div1 {
   display: flex;
-  height: 25px;
+  height: 100%;
 }
 
 .divButton {
@@ -75,4 +75,15 @@
 
 .contentRouter{
   padding-top: 45px;
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/abstract_tech_02.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#logout{
+  color: white;
 }

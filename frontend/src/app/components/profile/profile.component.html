@@ -1,15 +1,100 @@
-<mat-card class="consolelog">
-    
-    <div>
-        <mat-list>
-            <mat-list-item role="listitem">item 1</mat-list-item>
-        </mat-list>
-    </div>
-</mat-card>
-<mat-card class="software">
-    <div>
-        <mat-list>
-            <mat-list-item role="listitem">item 2</mat-list-item>
-        </mat-list>
-    </div>
-</mat-card>
+<div class="profile">
+    <mat-card class="matCardProfile">
+        <mat-card-title id="title">Perfil</mat-card-title>
+        <mat-card-content class="matCardContent">
+            <div id="editButton">
+                <button mat-icon-button matTooltip="Editar perfil" (click)="edit()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+            <form method="POST" class="my-form" [formGroup]="editForm" (ngSubmit)="saveChanges()">
+                <div class="edit">
+                    <!-- Name input -->
+                    <mat-form-field class="full-width">
+                        <input matInput name="first_name" type="text" class="input-field" formControlName="first_name"
+                            placeholder="Introduza seu Primeiro Nome" required />
+
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <input matInput name="last_name" type="text" class="input-field" formControlName="last_name"
+                            placeholder="Introduza o seu Último Nome" required />
+
+                    </mat-form-field>
+
+                    <!-- Email input -->
+                    <mat-form-field class="full-width">
+                        <input matInput name="email" type="text" class="input-field" formControlName="email"
+                            placeholder="Introduza o seu Email" />
+
+                    </mat-form-field>
+
+                    <!-- PhoneNumber input -->
+                    <mat-form-field class="full-width">
+                        <input matInput name="phone_number" type="text" class="input-field"
+                            formControlName="phone_number" placeholder="Introduza o seu Telemovel" required />
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+
+                    <mat-error *ngIf="error_edit">{{error_edit}}</mat-error>
+                    <mat-card-actions *ngIf="editForm.enabled" class="submitAction">
+                        <button mat-raised-button [disabled]="!editForm.valid" type="submit" class="save">
+                            Guardar Alterações
+                        </button>
+                        <button type="button" mat-raised-button (click)="cancel()" class="cancel">Cancelar</button>
+                    </mat-card-actions>
+                </div>
+            </form>
+
+            <mat-card-actions class="buttonChange">
+                <button *ngIf="changePasswordForm.disabled" color="primary" type="button" mat-raised-button
+                    (click)="enableChangePassword()" class="password">Alterar Palavra-passe</button>
+                <button *ngIf="changePasswordForm.enabled" color="primary" type="button" mat-raised-button
+                    (click)="disableChangePassword()" class="password">Não Alterar Palavra-passe</button>
+            </mat-card-actions>
+
+
+            <form method="POST" class="my-form" *ngIf="changePasswordForm.enabled" [formGroup]="changePasswordForm"
+                (ngSubmit)="changePassword()">
+                <div class="edit">
+
+                    <mat-form-field class="full-width">
+                        <input matInput name="password" [type]="hideOldPassword ? 'password' : 'text'"
+                            class="input-field" formControlName="oldPassword"
+                            placeholder="Introduza a Palavra-passe Atual" required />
+                        <button type="button" matSuffix mat-icon-button>
+                            <mat-icon
+                                matTooltip="{{hideOldPassword ? 'Mostrar Palavra-passe' : ' Não Mostrar Palavra-passe'}}"
+                                (click)="hideOldPassword = !hideOldPassword">{{ hideOldPassword ? "visibility_off" :
+                                "visibility" }}
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                        <input matInput name="password" [type]="hideNewPassword ? 'password' : 'text'"
+                            class="input-field" formControlName="newPassword"
+                            placeholder="Introduza a Nova Palavra-passe" required />
+                        <button type="button" matSuffix mat-icon-button>
+                            <mat-icon
+                                matTooltip="{{hideNewPassword ? 'Mostrar Palavra-passe' : ' Não Mostrar Palavra-passe'}}"
+                                (click)="hideNewPassword = !hideNewPassword">{{ hideNewPassword ? "visibility_off" :
+                                "visibility" }}
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-error *ngIf="error_password">{{error_password}}</mat-error>
+                    <mat-card-actions *ngIf="changePasswordForm.enabled" class="submitAction">
+                        <button mat-raised-button [disabled]="!changePasswordForm.valid" type="submit" class="save">
+                            Alterar
+                        </button>
+                        <button type="button" mat-raised-button (click)="disableChangePassword()"
+                            class="cancel">Cancelar</button>
+                    </mat-card-actions>
+                </div>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>

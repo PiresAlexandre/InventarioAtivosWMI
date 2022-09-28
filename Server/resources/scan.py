@@ -6,12 +6,13 @@ from mongoengine.errors import  DoesNotExist
 from database.models import EventLog, Machine, User, Disk, Scan, Software
 import wmi
 import pythoncom
+from flask_cors import cross_origin
 
 
 class ScanApi(Resource):
+    @cross_origin()
     @jwt_required()
     def post(self, machine_id):
-
         user_id = get_jwt_identity()
     
         try:            
@@ -104,9 +105,16 @@ class ScanApi(Resource):
         except (wmi.x_access_denied):
             return make_response(
             jsonify(
-                {"message": "Acesso negado"}
+                {"message": "Acess denied"}
             ),
-            200
+            400
+        )
+        except (wmi.x_wmi):
+            return make_response(
+            jsonify(
+                {"message": "Scan not possible"}
+            ),
+            400
         )
 
         finally:

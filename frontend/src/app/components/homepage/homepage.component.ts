@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MachinesService } from 'src/app/services/machines.service';
 
 
 @Component({
@@ -16,42 +18,34 @@ export class HomepageComponent implements OnInit {
   email!: string
   password!: string
 
-  error: string | null = null;
+  error: string | null | undefined;
+  loggedIn = false
 
-  constructor(private auth: AuthenticationService, private router: Router) {
-
+  constructor(private auth: AuthenticationService, private router: Router, private machineService: MachinesService) {
+   
   }
 
   ngOnInit(): void {
-    
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+    if (currentUser && currentUser.token) {
+      this.loggedIn = true;
+      this.router.navigate(['client'])
+      this.getMachines()
+    } else {
+      this.loggedIn = false;
+      this.router.navigate([''])
+    }
   }
 
-  registerUser() {   
-    this.auth.registerUser(AuthenticationService)
-      .subscribe(
-        data => {
-          localStorage.setItem('currentUser', JSON.stringify(data));
-          this.router.navigate(['addmachine'])
-
-        },
-        error => {
-          console.log(error.error.message);
-          if (error.status = 400) {
-            if (error.error.message === "First name is invalid") {
-              this.error = "Primeiro nome inválido"
-            } if (error.error.message === "Last name is invalid") {
-              this.error = "Ultimo nome inválido"
-            } if (error.error.message === "Phone number is invalid") {
-              this.error = "Nº telemóvel errado"
-            } if (error.error.message === "Email is invalid") {
-              this.error = "Email inválido"
-            }if (error.error.message === "Password must contain at least 8 caracters, one uppercase, one lowercase and one number") {
-              this.error = "Password deve conter ao menos 8 caracteres, 1 maiuscula, 1 minúscula e um número"
-          }
-          }
+  getMachines() {
+    this.machineService.getMachines().subscribe(
+      data => {
+        if (data.length > 0) {
+          this.router.navigate(['/inventario/' + data[0]._id.$oid])
         }
-      )
+      }, error => {
+        console.log(error);
 
+      })
   }
-
 }

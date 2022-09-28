@@ -1,0 +1,21 @@
+<mat-nav-list>
+    <mat-list-item mat-button class="buttonSidenav">
+        <div class="listaMachineDiv">
+            <a>Máquina</a>
+        </div>
+        <div class="listaMachinesButton" (click)="showMachines = !showMachines">
+            <mat-icon *ngIf="!showMachines" id="ic">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="showMachines" id="ic">keyboard_arrow_up</mat-icon>
+        </div>
+        <div class="addMachinesButton" [routerLink]="['add-machine']">
+            <mat-icon id="ic">add</mat-icon>
+        </div>
+    </mat-list-item>
+
+    <mat-nav-list class="machinesList" *ngIf="showMachines">
+        <mat-list-item *ngFor="let i of listMachines"  style="color:white">
+            <a mat-line style="text-align:left" [routerLink]="['/inventario/'+i._id.$oid]">{{i.ip}}</a>
+            <mat-icon id="ic_remove" matTooltip="Remover máquina" [matTooltipPosition]="'right'"(click)="removeMachine(i._id.$oid)">delete_outline</mat-icon>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-nav-list>

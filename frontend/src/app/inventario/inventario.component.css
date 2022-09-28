@@ -69,6 +69,7 @@ table {
     width: 100%;
     height: 60%;
     margin: 15px;
+    background-color: white;
 }
 
 table,
@@ -86,13 +87,56 @@ td {
 }
 
 
-  
-  .mat-table {
+
+.mat-table {
     overflow: auto;
     height: 100%;
-  }
+}
 
-  .tableSoftware{
+.tableSoftware {
     height: 95%;
-  }
-  
+}
+
+#buttonScan {
+    width: fit-content;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.disks {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.titleDialog{
+    font-size: 12px;    
+    text-align: center;
+}
+
+.titleSuccess{
+    font-size: 14px;    
+    text-align: center;
+    color: green;
+}
+
+.checkIcon{
+    vertical-align: bottom;
+    color: green;
+}
+
+.divTitle{
+    display: flex;
+}
+
+#buttonScan{
+    flex: 1;
+}
+
+#title{
+    margin: 0px;
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+    flex: 5;
+}

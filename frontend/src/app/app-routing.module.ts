@@ -9,9 +9,10 @@ import { InventarioComponent } from './inventario/inventario.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
+  { path: 'client', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'machines', component: AddmachineComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'add-machine', component: AddmachineComponent},
+  { path: 'view-profile', component: ProfileComponent},
   { path: 'inventario/:id', component: InventarioComponent}
 
 ];

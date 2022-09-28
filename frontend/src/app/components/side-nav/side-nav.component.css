@@ -1,0 +1,17 @@
+.listaMachineDiv{
+    width: 70%;
+}
+
+
+.buttonSidenav {
+    color: white;
+  }
+  
+.addMachinesButton{
+    width: 30%;
+    text-align: center;
+}
+
+#ic_remove{
+    color: red;
+}

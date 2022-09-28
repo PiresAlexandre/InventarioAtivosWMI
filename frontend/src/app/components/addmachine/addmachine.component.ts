@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MachinesService } from 'src/app/services/machines.service';
+import { SidenavServiceService } from 'src/app/services/sidenav-service.service';
 
 @Component({
   selector: 'app-addmachine',
@@ -13,41 +14,33 @@ import { MachinesService } from 'src/app/services/machines.service';
 
 
 export class AddmachineComponent implements OnInit {
-  @ViewChild('select') select!: MatSelect;
-
   error: string | null = null;
   registerForm: FormGroup;
-  fb: any;
   hide = true;
 
 
-  constructor(private auth: AuthenticationService, private router: Router) {
+  constructor(private machineService: MachinesService, private router: Router, private fb: FormBuilder) {
 
     this.registerForm = this.fb.group({
       ip: ['', [Validators.required]],
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],  
+      password: ['', [Validators.required]],
     });
-   }
+  }
 
   ngOnInit(): void {
   }
 
 
-  machine(){
+  machine() {
 
-     this.auth.registerMachine(this.registerForm.value)
-       .subscribe(
-         data => {       
-  
-         },
-        error => {
-         console.log(error.error.message);
-        
-         }
-         
-        
-      )
+    this.machineService.addMachine(this.registerForm.value).subscribe(
+      data => {
+        this.router.navigate([''])
+
+      }, error => {
+          this.error = error.error.message
+      })
 
 
   }

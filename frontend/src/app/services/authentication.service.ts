@@ -10,15 +10,10 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private endpoint = 'http://localhost:5000/api'
 
-  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
   constructor(private http: HttpClient, private router: Router) {
-    if (localStorage.getItem('currentUser') != null) {
-      this.isUserLoggedIn.next(true);
-    } else {
-      this.isUserLoggedIn.next(false);
-    }
+
   }
 
   ngOnInit() {
@@ -32,16 +27,14 @@ export class AuthenticationService {
     return this.http.post<any>(this.endpoint + '/users', user);
   }
 
-  registerMachine(user: any): Observable<any> {
-    return this.http.post<any>(this.endpoint + '/machines', user);
-  }
+  
+
+
   
   logout() {
     if (localStorage.getItem('currentUser') != null) {
       localStorage.removeItem('currentUser')
-      this.isUserLoggedIn.next(false);
     }
-
   }
 
 

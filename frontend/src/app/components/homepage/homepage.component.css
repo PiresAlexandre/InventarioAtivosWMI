@@ -10,6 +10,10 @@
   background-attachment: fixed;
 }
 
+.logged{
+  text-align: center;
+}
+
 .flex-child-element {
   flex: 1;
   margin: 145px;
@@ -26,4 +30,15 @@ h1{
 
 p{
   color: white;
+}
+
+
+#title{
+  margin: 0;
+  padding-top: 10%;
+  text-align: center;
+}
+
+#button{
+  margin-top: 5%;
 }

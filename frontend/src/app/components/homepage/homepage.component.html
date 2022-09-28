@@ -1,13 +1,19 @@
-
-
-<div class="flex-parent-element">
+<div *ngIf="!loggedIn" class="flex-parent-element">
     <div class="flex-child-element magenta">
         <div class="hero-text">
-            <h1>Deseja fazer um scan a sua maquina?</h1>
+            <h1>Deseja fazer um scan das suas maquinas?</h1>
             <p>Registe-se e comece já!</p>
         </div>
     </div>
     <div class="flex-child-element green">
         <app-login></app-login>
+    </div>
+</div>
+
+<div *ngIf="loggedIn" class="logged">
+    <div>
+        <h1 id="title">Não tem nenhuma Máquina adicionada</h1>
+        <button id="button" mat-raised-button color="primary" [routerLink]="['/add-machine']">Adicionar uma
+            Máquina</button>
     </div>
 </div>

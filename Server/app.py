@@ -20,7 +20,7 @@ app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
 api = Api(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-cors = CORS(app)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 initialize_db(app)
 

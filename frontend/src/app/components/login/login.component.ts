@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   hide2 = true;
 
-  constructor(private auth: AuthenticationService, private router: Router, public userService: UserService, private fb: FormBuilder,) {
+  constructor(private auth: AuthenticationService, private router: Router, public userService: UserService, private fb: FormBuilder) {
     this.toggle = false;
 
     this.loginForm = this.fb.group({
@@ -63,8 +63,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.error_login = null
           localStorage.setItem('currentUser', JSON.stringify(data));
-          this.auth.isUserLoggedIn.next(true)
-          this.router.navigate(['profile'])
+          this.router.navigate(['client'])
 
         },
         error => {

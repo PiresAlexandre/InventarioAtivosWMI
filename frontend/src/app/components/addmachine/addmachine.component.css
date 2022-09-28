@@ -1,8 +1,17 @@
-.div2 {
+.matCardRegister {
   margin-top: 200px;
   width: 400px;
+  margin-top: 500px;
   height: auto;
   margin: auto;
+}
+
+#title{
+  text-align: center;
+}
+
+.divCard{
+  margin-top: 10%;
 }
 
 .my-form {

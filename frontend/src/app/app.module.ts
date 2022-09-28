@@ -12,8 +12,7 @@ import { AddmachineComponent } from './components/addmachine/addmachine.componen
 import { ProfileComponent } from './components/profile/profile.component';
 import { JwtInterceptor } from './helpers/JwtInterceptor';
 import { FormsModule } from '@angular/forms';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,8 +24,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { InventarioComponent } from './inventario/inventario.component';
-import {MatTableModule} from '@angular/material/table'
-
+import {MatTableModule} from '@angular/material/table';
+import { SideNavComponent } from './components/side-nav/side-nav.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -39,6 +39,7 @@ import {MatTableModule} from '@angular/material/table'
     AddmachineComponent,
     ProfileComponent,
     InventarioComponent,
+    SideNavComponent,
     
    
   ],
@@ -58,8 +59,9 @@ import {MatTableModule} from '@angular/material/table'
     MatTooltipModule, 
     ReactiveFormsModule,
     MatButtonModule,
-    MatTableModule
-  
+    MatTableModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [HomepageComponent,{
     provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

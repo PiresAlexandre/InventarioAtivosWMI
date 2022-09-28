@@ -1,5 +1,6 @@
-<mat-card>
-    <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+<div class="divCard">
+    <mat-card class="matCardRegister">
+        <mat-card-title id="title">Adicionar máquina</mat-card-title>
         <form method="POST" class="my-form" [formGroup]="registerForm" (submit)="machine()">
 
             <mat-form-field class="full-width">
@@ -20,13 +21,13 @@
                     formControlName="password" placeholder="Introduza a Palavra-passe" required />
             </mat-form-field>
 
+            <mat-error *ngIf="error">{{error}}</mat-error>
 
             <div mat-dialog-actions class="actionL">
                 <button id="button" mat-raised-button [disabled]="!registerForm.valid" color="primary"
                     type="submit">Registar</button>
             </div>
         </form>
-    </div>
 
-</mat-card>
-
+    </mat-card>
+</div>

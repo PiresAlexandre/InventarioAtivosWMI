@@ -8,26 +8,21 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private endpoint = "http://localhost:5000/api"
-  token: any
 
-  httpOptions
 
   constructor(private http: HttpClient) {
-    if (localStorage.getItem('currentUser') != null) {
-      let currentUser: any = localStorage.getItem('currentUser')
-      let Object = JSON.parse(currentUser);
-      this.token = Object.token
-      this.httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + this.token
-        })
-      };
-    }
+
   }
 
   getProfile(): Observable<any> {
-    return this.http.get<any>(this.endpoint + '/auth/profile', this.httpOptions);
+    return this.http.get<any>(this.endpoint + '/auth/profile');
   }
 
+  editProfile(user: any): Observable<any> {
+    return this.http.put<any>(this.endpoint + '/auth/profile', user);
+  }
+
+  changePassword(formChangePassword: any): Observable<any> {
+    return this.http.post<any>(this.endpoint + '/auth/changepassword', formChangePassword);
+  }
 }
